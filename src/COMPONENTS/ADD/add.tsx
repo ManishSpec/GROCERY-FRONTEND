@@ -168,7 +168,7 @@ function ADD() {
           </div>
 
           <div className="product-box">
-            <img alt="apple" src="images/garlic.png" />
+            <img alt="apple" src="https://th.bing.com/th/id/OIP.j1wtIDvit6f5-TI_ONSERgHaFj?w=263&h=197&c=7&r=0&o=5&dpr=1.3&pid=1.7" />
             <strong>Garlic</strong>
             <span className="quantity">1 KG</span>
             <span className="price">Rs.60/-</span>
@@ -181,7 +181,7 @@ function ADD() {
           </div>
 
           <div className="product-box">
-            <img alt="apple" src="images/tamato.png" />
+            <img alt="apple" src="https://th.bing.com/th/id/OIP.OBKKA27v0VUeDTRMhzG_gAHaFX?w=276&h=200&c=7&r=0&o=5&dpr=1.3&pid=1.7" />
             <strong>Tamato</strong>
             <span className="quantity">1 KG</span>
             <span className="price">Rs.20/-</span>

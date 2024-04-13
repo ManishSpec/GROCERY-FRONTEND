@@ -1,11 +1,29 @@
+import axios from "axios";
 import "./Login.css";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 function Login() {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log("name--->" + name);
+    console.log("password--->" + password);
+    axios
+      .get("http://localhost:8080/login?name=" + name + "&password=" + password)
+      .then((res) => {
+        console.log(res.data);
+        navigate("/home");
+      });
+  };
+
   return (
     <div>
       <div className="container">
         <div className="screen">
           <div className="screen__content">
-            <form className="login">
+            <form className="login" onSubmit={handleSubmit}>
               <h1 className="head">LOGIN</h1>
               <div className="login__field">
                 <i className="login__icon fas fa-user"></i>
@@ -14,6 +32,11 @@ function Login() {
                   className="login__input"
                   placeholder="UserName"
                   name="uname"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setName(e.target.value);
+                  }}
+                  required
                 />
               </div>
               <div className="login__field">
@@ -23,11 +46,17 @@ function Login() {
                   className="login__input"
                   placeholder="Password"
                   name="pass"
-
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setPassword(e.target.value);
+                  }}
+                  required
                 />
               </div>
-              <button className="button login__submit" >
-                <span className="button__text"><a href="/home">Login</a></span>
+              <button className="button login__submit">
+                <span className="button__text">
+                  <Link to="/home">Submit</Link>
+                </span>
                 <i className="button__icon fas fa-chevron-right"></i>
               </button>
             </form>
