@@ -1,23 +1,31 @@
 import axios from "axios";
 import "./Login.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import ADD from "../ADD/add";
 function Login() {
-  const [name, setName] = useState("");
+  const [username, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("name--->" + name);
+    console.log("name--->" + username);
     console.log("password--->" + password);
     axios
-      .get("http://localhost:8080/login?name=" + name + "&password=" + password)
+      .get("http://localhost:8080/get/user?username=" + username + "&password=" + password)
       .then((res) => {
         console.log(res.data);
+        if(res.data=="failure"){
         navigate("/home");
+        }
+        else{
+          alert("INVALID USERNAME / PASSWORD");
+          setName("");
+          setPassword("");
+          navigate("/");
+        }
       });
   };
-
   return (
     <div>
       <div className="container">
@@ -32,6 +40,7 @@ function Login() {
                   className="login__input"
                   placeholder="UserName"
                   name="uname"
+                  value={username}
                   onChange={(e) => {
                     console.log(e.target.value);
                     setName(e.target.value);
@@ -46,6 +55,7 @@ function Login() {
                   className="login__input"
                   placeholder="Password"
                   name="pass"
+                  value={password}
                   onChange={(e) => {
                     console.log(e.target.value);
                     setPassword(e.target.value);
@@ -53,10 +63,8 @@ function Login() {
                   required
                 />
               </div>
-              <button className="button login__submit">
-                <span className="button__text">
-                  <Link to="/home">Submit</Link>
-                </span>
+              <button className="button login__submit" onSubmit={ADD}>
+                <span className="button__text">SUBMIT</span>
                 <i className="button__icon fas fa-chevron-right"></i>
               </button>
             </form>
